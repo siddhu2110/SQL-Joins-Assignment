@@ -1,0 +1,563 @@
+Joins--
+inner joins 
+left join
+right join
+full join // full outer join
+cross join
+self join
+
+
+
+ MySQL  localhost:33060+ ssl  SQL > show databases;
++-------------------------+
+| Database                |
++-------------------------+
+| information_schema      |
+| institution             |
+| mysql                   |
+| performance_schema      |
+| sadabadschoolmanagement |
+| school_management       |
+| siddhudb                |
+| sys                     |
+| transaction             |
++-------------------------+
+9 rows in set (0.0022 sec)
+ MySQL  localhost:33060+ ssl  SQL > use sadabadschoolmanagement;
+Default schema set to `sadabadschoolmanagement`.
+Fetching global names, object names from `sadabadschoolmanagement` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > show tables;
++-----------------------------------+
+| Tables_in_sadabadschoolmanagement |
++-----------------------------------+
+| student_records                   |
++-----------------------------------+
+1 row in set (0.0030 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select * from sadabadschoolmanagement;
+ERROR: 1146: Table 'sadabadschoolmanagement.sadabadschoolmanagement' doesn't exist
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select * from school_records;
+ERROR: 1146: Table 'sadabadschoolmanagement.school_records' doesn't exist
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > desc student_records;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| roll_number | bigint      | NO   | PRI | NULL    |       |
+| name        | varchar(80) | YES  |     | NULL    |       |
+| email       | varchar(80) | YES  | UNI | NULL    |       |
+| age         | int         | YES  |     | NULL    |       |
+| schoolName  | varchar(80) | YES  |     | NULL    |       |
+| mobile      | varchar(15) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.0048 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select * from student_records;
++-------------+-------------+----------------------+-----+-----------------------+---------+
+| roll_number | name        | email                | age | schoolName            | mobile  |
++-------------+-------------+----------------------+-----+-----------------------+---------+
+|           1 | siddhartha  | siddhartha@gmail.com |  18 | St.John's high school | 9874632 |
+|           2 | laxman      | laxman@gmail.com     |  19 | St.John's high school |         |
+|           3 | sai kiran   | saikiran@gmail.com   |  18 | St.John's high school |         |
+|           4 | koushik     | koushik@gmail.com    |  18 | St.John's high school |         |
+|           5 | Vamshi      | vamshi@gmail.com     |  17 | St.John's high school |         |
+|           6 | karthikeya  | karthikeya@gmail.com |  19 | St.John's high school |         |
+|           7 | vishnu      | vishnu@gmail.com     |  16 | St.John's high school |         |
+|           8 | phani kumar | phanikumar@gmail.com |  18create table marks();ool |         |
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1----------+-------------+----------------------+----select * from student_records;-----+
+ MySQL  localhost:33060+ ssl  sadabadschoolmanagement  SQL > e table marks();
+ MySQL  localhost:33060+ ssl  sadabadschoolmanagement  SQL > e table marks();
+ MySQL  localhost:33060+ ssl  sadabadschoolmanagement  SQL >
+ MySQL  localhost:33060+ ssl  sadabadschoolmanagement  SQL > select * from student_records;
++-------------+-------------+----------------------+-----+-----------------------+---------+
+| roll_number | name        | email                | age | schoolName            | mobile  |
++-------------+-------------+----------------------+-----+-----------------------+---------+
+|           1 | siddhartha  | siddhartha@gmail.com |  18 | St.John's high school | 9874632 |
+|           2 | laxman      | laxman@gmail.com     |  19 | St.John's high school |         |
+|           3 | sai kiran   | saikiran@gmail.com   |  18 | St.John's high school |         |
+|           4 | koushik     | koushik@gmail.com    |  18 | St.John's high school |         |
+|           5 | Vamshi      | vamshi@gmail.com     |  17 | St.John's high school |         |
+|           6 | karthikeya  | karthikeya@gmail.com |  19 | St.John's high school |         |
+|           7 | vishnu      | vishnu@gmail.com     |  16 | St.John's high school |         |
+|           8 | phani kumar | phanikumar@gmail.com |  18 | St.John's high school |         |
+|           9 | varshith    | varshith@gmail.com   |  18 | St.John's high school |         |
++-------------+-------------+----------------------+-----+-----------------------+---------+
+9 rows in set (0.0012 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolmanagement  SQL > create table marks(student_id,int),(student_marks,int);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',int),(student_marks,int)' at line 1
+ MySQL  localhost:33060+ ssl  sadabadschoolmanagement  SQL > create table marks(student_id,int);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',int)' at line 1
+ MySQL  localhost:33060+ ssl  sadabadschoolmanagement  SQL > create table marks student_id,int;                                          create table marks(student_id,int),(student_marks,int);                     create table marks(student_id,int);
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL >
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL >
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > create table marks(student_id int,student_marks int);
+Query OK, 0 rows affected (0.0446 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > insert into marks values(1,50),(2,45),(3,55),(4,50),(5,45),(6,65),(7,50),(8,50),(9,50);
+Query OK, 9 rows affected (0.0251 sec)
+
+Records: 9  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select * from marks;
+
++------------+---------------+
+| student_id | student_marks |
++------------+---------------+
+|          1 |            50 |
+|          2 |            45 |
+|          3 |            55 |
+|          4 |            50 |
+|          5 |            45 |
+|          6 |            65 |
+|          7 |            50 |
+|          8 |            50 |
+|          9 |            50 |
++------------+---------------+
+9 rows in set (0.0012 sec)
+MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select marks.student_id,marks.student_marks,distinct (student_records.name) from student_records join marks;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'distinct (student_records.name) from student_records join marks' at line 1
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select marks.student_id,marks.student_marks,student_records.name from student_records inner join marks on marks.student_id=student_records.roll_number;
++------------+---------------+-------------+
+| student_id | student_marks | name        |
++------------+---------------+-------------+
+|          1 |            50 | siddhartha  |
+|          2 |            45 | laxman      |
+|          3 |            55 | sai kiran   |
+|          4 |            50 | koushik     |
+|          5 |            45 | Vamshi      |
+|          6 |            65 | karthikeya  |
+|          7 |            50 | vishnu      |
+|          8 |            50 | phani kumar |
+|          9 |            50 | varshith    |
++------------+---------------+-------------+
+9 rows in set (0.0013 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > alter table marks delete where student_id=9;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'delete where student_id=9' at line 1
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > delete from marks where student_id=9 and student_id=8;
+Query OK, 0 rows affected (0.0024 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select * from marks;
+
++------------+---------------+
+| student_id | student_marks |
++------------+---------------+
+|          1 |            50 |
+|          2 |            45 |
+|          3 |            55 |
+|          4 |            50 |
+|          5 |            45 |
+|          6 |            65 |
+|          7 |            50 |
+|          8 |            50 |
+|          9 |            50 |
++------------+---------------+
+9 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select * from marks;
+
++------------+---------------+
+| student_id | student_marks |
++------------+---------------+
+|          1 |            50 |
+|          2 |            45 |
+|          3 |            55 |
+|          4 |            50 |
+|          5 |            45 |
+|          6 |            65 |
+|          7 |            50 |
+|          8 |            50 |
+|          9 |            50 |
++------------+---------------+
+9 rows in set (0.0007 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > delete from marks where student_id=9 ;
+Query OK, 1 row affected (0.0235 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select * from marks;
+
++------------+---------------+
+| student_id | student_marks |
++------------+---------------+
+|          1 |            50 |
+|          2 |            45 |
+|          3 |            55 |
+|          4 |            50 |
+|          5 |            45 |
+|          6 |            65 |
+|          7 |            50 |
+|          8 |            50 |
++------------+---------------+
+8 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > delete from marks where student_id=8 and where student_id=7;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where student_id=7' at line 1
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select * from marks;
+
++------------+---------------+
+| student_id | student_marks |
++------------+---------------+
+|          1 |            50 |
+|          2 |            45 |
+|          3 |            55 |
+|          4 |            50 |
+|          5 |            45 |
+|          6 |            65 |
+|          7 |            50 |
+|          8 |            50 |
++------------+---------------+
+8 rows in set (0.0012 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select marks.student_id,marks.student_marks,student_records.name from student_records inner join marks on marks.student_id=student_records.roll_number;
++------------+---------------+-------------+
+| student_id | student_marks | name        |
++------------+---------------+-------------+
+|          1 |            50 | siddhartha  |
+|          2 |            45 | laxman      |
+|          3 |            55 | sai kiran   |
+|          4 |            50 | koushik     |
+|          5 |            45 | Vamshi      |
+|          6 |            65 | karthikeya  |
+|          7 |            50 | vishnu      |
+|          8 |            50 | phani kumar |
++------------+---------------+-------------+
+8 rows in set (0.0013 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select marks.student_id,marks.student_marks,student_records.name from student_records left join marks on marks.student_id=student_records.roll_number;
++------------+---------------+-------------+
+| student_id | student_marks | name        |
++------------+---------------+-------------+
+|          1 |            50 | siddhartha  |
+|          2 |            45 | laxman      |
+|          3 |            55 | sai kiran   |
+|          4 |            50 | koushik     |
+|          5 |            45 | Vamshi      |
+|          6 |            65 | karthikeya  |
+|          7 |            50 | vishnu      |
+|          8 |            50 | phani kumar |
+|       NULL |          NULL | varshith    |
++------------+---------------+-------------+
+9 rows in set (0.0013 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL > select marks.student_id,marks.student_marks,student_records.name from student_records right join marks on marks.student_id=student_records.roll_number;
++------------+---------------+-------------+
+| student_id | student_marks | name        |
++------------+---------------+-------------+
+|          1 |            50 | siddhartha  |
+|          2 |            45 | laxman      |
+|          3 |            55 | sai kiran   |
+|          4 |            50 | koushik     |
+|          5 |            45 | Vamshi      |
+|          6 |            65 | karthikeya  |
+|          7 |            50 | vishnu      |
+|          8 |            50 | phani kumar |
++------------+---------------+-------------+
+8 rows in set (0.0013 sec)
+ MySQL  localhost:33060+ ssl  sadabadschoolman... SQL >
+
+
+Last login: Tue Dec 23 13:49:36 on ttys000
+sakethbanda@Sakeths-MacBook-Air ~ % mysql -u root -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 19
+Server version: 8.0.44 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| school_management  |
+| sys                |
+| transaction        |
++--------------------+
+6 rows in set (0.02 sec)
+
+mysql> create database crossjoin;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| crossjoin          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| school_management  |
+| sys                |
+| transaction        |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use crossjoin;
+Database changed
+mysql> create table students( name varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table subjects (sub varchar(20));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into students(name) values ("Ajay"),("Siddhu"),("Dhreej");
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into subjects (sub) values ("telugu"),("maths"),("science");
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from students;
++--------+
+| name   |
++--------+
+| Ajay   |
+| Siddhu |
+| Dhreej |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from subjects;
++---------+
+| sub     |
++---------+
+| telugu  |
+| maths   |
+| science |
++---------+
+3 rows in set (0.00 sec)
+
+mysql> select t1.*,t2.* from students t1 cross join subjects t2;
++--------+---------+
+| name   | sub     |
++--------+---------+
+| Dhreej | telugu  |
+| Siddhu | telugu  |
+| Ajay   | telugu  |
+| Dhreej | maths   |
+| Siddhu | maths   |
+| Ajay   | maths   |
+| Dhreej | science |
+| Siddhu | science |
+| Ajay   | science |
++--------+---------+
+9 rows in set (0.01 sec)
+
+mysql> create table colors( color_name varchar(30));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table sizes (color_size varchar(20));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into colors (color_name ) values ("red"),("yellow"),("green");
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into sizes(color_size) values ("s"),("m"),("l");
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from colors;
++------------+
+| color_name |
++------------+
+| red        |
+| yellow     |
+| green      |
++------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from sizes;
++------------+
+| color_size |
++------------+
+| s          |
+| m          |
+| l          |
++------------+
+3 rows in set (0.00 sec)
+
+mysql> select t1.*,t2.* from colors t1 cross join sizes t2;
++------------+------------+
+| color_name | color_size |
++------------+------------+
+| green      | s          |
+| yellow     | s          |
+| red        | s          |
+| green      | m          |
+| yellow     | m          |
+| red        | m          |
+| green      | l          |
+| yellow     | l          |
+| red        | l          |
++------------+------------+
+9 rows in set (0.00 sec)
+
+mysql> create table food (item varchar(30));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table drinks(drink varchar(30));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into food(item) values ("pizza"),("fries"),("birayani"),("tiffin");
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> insert into drinks(drink) values("thumb up"),("coke"),("beer"),("juice");
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from food;
++----------+
+| item     |
++----------+
+| pizza    |
+| fries    |
+| birayani |
+| tiffin   |
++----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from drinks;
++----------+
+| drink    |
++----------+
+| thumb up |
+| coke     |
+| beer     |
+| juice    |
++----------+
+4 rows in set (0.00 sec)
+
+mysql> select t1.*,t2.* from food t1 cross join drinks t2;
++----------+----------+
+| item     | drink    |
++----------+----------+
+| tiffin   | thumb up |
+| birayani | thumb up |
+| fries    | thumb up |
+| pizza    | thumb up |
+| tiffin   | coke     |
+| birayani | coke     |
+| fries    | coke     |
+| pizza    | coke     |
+| tiffin   | beer     |
+| birayani | beer     |
+| fries    | beer     |
+| pizza    | beer     |
+| tiffin   | juice    |
+| birayani | juice    |
+| fries    | juice    |
+| pizza    | juice    |
++----------+----------+
+16 rows in set (0.00 sec)
+
+mysql> create table employees (id int primary key auto_increment,names varchar(20));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table shifts ( timing varchar(20));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into employees (names) values("saketh"),("pranith"),("revanth");
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into shifts(timing) values("night"),("morning"),("daytime");
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++----+---------+
+| id | names   |
++----+---------+
+|  1 | saketh  |
+|  2 | pranith |
+|  3 | revanth |
++----+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from shifts;
++---------+
+| timing  |
++---------+
+| night   |
+| morning |
+| daytime |
++---------+
+3 rows in set (0.01 sec)
+
+mysql> select t1.*,t2.* from employees t1 cross join shifts t2;
++----+---------+---------+
+| id | names   | timing  |
++----+---------+---------+
+|  3 | revanth | night   |
+|  2 | pranith | night   |
+|  1 | saketh  | night   |
+|  3 | revanth | morning |
+|  2 | pranith | morning |
+|  1 | saketh  | morning |
+|  3 | revanth | daytime |
+|  2 | pranith | daytime |
+|  1 | saketh  | daytime |
++----+---------+---------+
+9 rows in set (0.00 sec)
+
+mysql> create table country ( name varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table currency (money varchar(20));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into country (name) value ("india"),("america"),("dubai"),("saudi");
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> insert into currency ( money) values ("rupees"),("dollars"),("pounds"),("dinar");
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from country;
++---------+
+| name    |
++---------+
+| india   |
+| america |
+| dubai   |
+| saudi   |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from currency;
++---------+
+| money   |
++---------+
+| rupees  |
+| dollars |
+| pounds  |
+| dinar   |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> select t1.*,t2.* from country t1 cross join currency t2;
++---------+---------+
+| name    | money   |
++---------+---------+
+| saudi   | rupees  |
+| dubai   | rupees  |
+| america | rupees  |
+| india   | rupees  |
+| saudi   | dollars |
+| dubai   | dollars |
+| america | dollars |
+| india   | dollars |
+| saudi   | pounds  |
+| dubai   | pounds  |
+| america | pounds  |
+| india   | pounds  |
+| saudi   | dinar   |
+| dubai   | dinar   |
+| america | dinar   |
+| india   | dinar   |
++---------+---------+
+16 rows in set (0.00 sec)
+
+mysql>
+
+
+
